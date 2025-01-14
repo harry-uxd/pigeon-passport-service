@@ -1,0 +1,39 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName="Apply for a pigeon passport" %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-xl">
+      Pigeon passport service
+    </h1>
+    <p class="govuk-body">Use this service to apply for and manage existing passports for your pigeons.</p>
+    <h2 class="govuk-heading-m">Before you start</h2>
+    <p class="govuk-body">You will need:</p>
+    <ul class="govuk-list">
+        <li>
+            details about your pigeon
+        </li>
+        <li>
+            a photograph of your pigeon
+        </li>
+        <li>
+            a list of your pigeon's vaccinations
+        </li>
+        <li>
+            a list of countries your pigeon will visit
+        </li>
+    </ul>
+    <p class="govuk-body">You will be able to create a pigeon passport account if you do not already have one.</p>
+    <a href="login/enter-details" role="button" draggable="false" class="govuk-button govuk-button--start" data-module="govuk-button">
+        Start now
+        <svg class="govuk-button__start-icon" xmlns="http://www.w3.org/2000/svg" width="17.5" height="19" viewBox="0 0 33 40" aria-hidden="true" focusable="false">
+          <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z" />
+        </svg>
+      </a>
+</div>
+</div>
+
+{% endblock %}

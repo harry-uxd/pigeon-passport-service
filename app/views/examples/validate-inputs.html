@@ -1,0 +1,73 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName="Apply for a pigeon passport" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <form id="sign-in-form" action="/validate-inputs" method="post">
+            <fieldset class="govuk-fieldset">
+                <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+                    <h1 class="govuk-fieldset__heading">
+                        Validate inputs
+                    </h1>
+                </legend>
+                <div class="govuk-form-group">
+                    <label class="govuk-label" for="text">
+                        Text input
+                    </label>
+                    <input class="govuk-input govuk-input--width-20" id="email" name="email" type="text">
+                </div>
+
+                <div class="govuk-date-input" id="date-input">
+                    <div class="govuk-date-input__item">
+                        <div class="govuk-form-group">
+                            <label class="govuk-label govuk-date-input__label" for="date-input-day">
+                                Day
+                            </label>
+                            <input class="govuk-input govuk-date-input__input govuk-input--width-2"
+                                id="date-input-day" name="date-input-day" type="text" inputmode="numeric">
+                        </div>
+                    </div>
+                    <div class="govuk-date-input__item">
+                        <div class="govuk-form-group">
+                            <label class="govuk-label govuk-date-input__label" for="date-input-month">
+                                Month
+                            </label>
+                            <input class="govuk-input govuk-date-input__input govuk-input--width-2"
+                                id="date-input-month" name="date-input-month" type="text" inputmode="numeric">
+                        </div>
+                    </div>
+                    <div class="govuk-date-input__item">
+                        <div class="govuk-form-group">
+                            <label class="govuk-label govuk-date-input__label" for="date-input-year">
+                                Year
+                            </label>
+                            <input class="govuk-input govuk-date-input__input govuk-input--width-4"
+                                id="date-input-year" name="date-input-year" type="text" inputmode="numeric">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="govuk-button-group">
+                    <button type="submit" class="govuk-button" data-module="govuk-button">
+                        Continue
+                    </button>
+                    <a class="govuk-link" href="create-account/email">Create an account</a>
+                </div>
+        </form>
+    </div>
+</div>
+<script type="application/json" id="validation-rules">
+    {
+        "text": {
+            "presence": { "allowEmpty": false, "message": "Enter a value" },
+            "email": { "message": "Enter a valid email address" },
+            "length": { "minimum": 6, "message": "Text must be at least 6 characters" }
+            ""
+        },
+        
+    }
+    </script>
+
+{% endblock %}
