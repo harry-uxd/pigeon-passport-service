@@ -1,3 +1,4 @@
 {
-  "serviceName": "Pigeon passport service"
+  "serviceName": "Pigeon passport service",
+  "useAuth": false
 }

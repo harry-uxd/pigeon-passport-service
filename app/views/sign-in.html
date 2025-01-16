@@ -2,6 +2,10 @@
 
 {% set pageName="Apply for a pigeon passport" %}
 
+{% block pageScripts %}
+
+{% endblock %}
+
 {% block content %}
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
@@ -47,13 +51,16 @@
     {
         "email": {
             "presence": { "allowEmpty": false, "message": "Email is required" },
-            "email": { "message": "Enter a valid email address" }
+            "email": { "message": "Enter a valid email address" },
+            "match": { "message": "We could not find an account associated with that email address" }
+
         },
         "password": {
             "presence": { "allowEmpty": false, "message": "Password is required" },
-            "length": { "minimum": 6, "message": "Password must be at least 6 characters" }
+            "length": { "minimum": 6, "message": "Password must be at least 6 characters" },
+            "authenticate": { "message": "Incorrect password" }
         }
     }
-    </script>
+</script>
 
 {% endblock %}

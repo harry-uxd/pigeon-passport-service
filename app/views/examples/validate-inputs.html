@@ -12,49 +12,95 @@
                         Validate inputs
                     </h1>
                 </legend>
+                <!-- TODO: Date input, textarea(has some funny error message display requirements), file upload, -->
                 <div class="govuk-form-group">
                     <label class="govuk-label" for="text">
                         Text input
                     </label>
-                    <input class="govuk-input govuk-input--width-20" id="email" name="email" type="text">
+                    <input class="govuk-input govuk-input--width-20" id="text" name="text" type="text">
                 </div>
 
-                <div class="govuk-date-input" id="date-input">
-                    <div class="govuk-date-input__item">
-                        <div class="govuk-form-group">
-                            <label class="govuk-label govuk-date-input__label" for="date-input-day">
-                                Day
+                <!-- <div class="govuk-form-group">
+                    <label class="govuk-label" for="file-upload">
+                        Upload a file
+                    </label>
+                    <input class="govuk-file-upload" id="file-upload" name="file-upload" type="file">
+                </div> -->
+
+                <div class="govuk-form-group">
+                    <label class="govuk-label" for="sort">
+                        Sort by
+                    </label>
+                    <select class="govuk-select" id="sort" name="sort">
+                        <option value="" disabled selected></option>
+                        <option value="published">Recently published</option>
+                        <option value="updated">Recently updated</option>
+                        <option value="views">Most views</option>
+                        <option value="comments">Most comments</option>
+                    </select>
+                </div>
+
+                <div class="govuk-form-group">
+                    <div class="govuk-radios" data-module="govuk-radios">
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="example-radio" name="example-radio" type="radio"
+                                value="Radio option 1">
+                            <label class="govuk-label govuk-radios__label" for="example-radio">
+                                Radio option 1
                             </label>
-                            <input class="govuk-input govuk-date-input__input govuk-input--width-2"
-                                id="date-input-day" name="date-input-day" type="text" inputmode="numeric">
                         </div>
-                    </div>
-                    <div class="govuk-date-input__item">
-                        <div class="govuk-form-group">
-                            <label class="govuk-label govuk-date-input__label" for="date-input-month">
-                                Month
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="example-radio-2" name="example-radio" type="radio"
+                                value="Radio option 2">
+                            <label class="govuk-label govuk-radios__label" for="example-radio-2">
+                                Radio option 2
                             </label>
-                            <input class="govuk-input govuk-date-input__input govuk-input--width-2"
-                                id="date-input-month" name="date-input-month" type="text" inputmode="numeric">
                         </div>
-                    </div>
-                    <div class="govuk-date-input__item">
-                        <div class="govuk-form-group">
-                            <label class="govuk-label govuk-date-input__label" for="date-input-year">
-                                Year
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="example-radio-3" name="example-radio" type="radio"
+                                value="Radio option 3">
+                            <label class="govuk-label govuk-radios__label" for="example-radio-3">
+                                Radio option 3
                             </label>
-                            <input class="govuk-input govuk-date-input__input govuk-input--width-4"
-                                id="date-input-year" name="date-input-year" type="text" inputmode="numeric">
+                        </div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="example-radio-4" name="example-radio" type="radio"
+                                value="Radio option 4">
+                            <label class="govuk-label govuk-radios__label" for="example-radio-4">
+                                Radio option 4
+                            </label>
                         </div>
                     </div>
                 </div>
 
-                <div class="govuk-button-group">
-                    <button type="submit" class="govuk-button" data-module="govuk-button">
-                        Continue
-                    </button>
-                    <a class="govuk-link" href="create-account/email">Create an account</a>
+                <div class="govuk-form-group">
+                    <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+                        <div class="govuk-checkboxes__item">
+                            <input class="govuk-checkboxes__input" id="example-checkbox" name="example-checkbox"
+                                type="checkbox" value="Checkbox option 1">
+                            <label class="govuk-label govuk-checkboxes__label" for="example-checkbox">
+                                Checkbox option 1
+                            </label>
+                        </div>
+                        <div class="govuk-checkboxes__item">
+                            <input class="govuk-checkboxes__input" id="example-checkbox-2" name="example-checkbox"
+                                type="checkbox" value="Checkbox option 2">
+                            <label class="govuk-label govuk-checkboxes__label" for="example-checkbox-2">
+                                Checkbox option 2
+                            </label>
+                        </div>
+                        <div class="govuk-checkboxes__item">
+                            <input class="govuk-checkboxes__input" id="example-checkbox-3" name="example-checkbox"
+                                type="checkbox" value="Checkbox option 3">
+                            <label class="govuk-label govuk-checkboxes__label" for="example-checkbox-3">
+                                Checkbox option 3
+                            </label>
+                        </div>
+                    </div>
                 </div>
+                <button type="submit" class="govuk-button" data-module="govuk-button">
+                    Continue
+                </button>
         </form>
     </div>
 </div>
@@ -64,9 +110,16 @@
             "presence": { "allowEmpty": false, "message": "Enter a value" },
             "email": { "message": "Enter a valid email address" },
             "length": { "minimum": 6, "message": "Text must be at least 6 characters" }
-            ""
         },
-        
+        "sort": {
+            "presence": { "allowEmpty": false, "message": "Select a sort option" }
+        },
+        "example-radio": {
+            "presence": { "allowEmpty": false, "message": "Select a radio option" }
+        },
+        "example-checkbox": {
+            "presence": { "allowEmpty": false, "message": "Select a checkbox" }
+        }
     }
     </script>
 
