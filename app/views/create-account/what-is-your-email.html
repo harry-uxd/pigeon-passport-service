@@ -1,0 +1,51 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName="What is your email address?" %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <form action="/what-is-your-email" method="post" novalidate>
+      <fieldset class="govuk-fieldset">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl govuk-!-padding-bottom-4">
+          <span class="govuk-caption-l">Create an account - Step 2 of 6</span>
+          <h1 class="govuk-fieldset__heading">
+            What is your email address?
+          </h1>
+        </legend>
+        <div class="govuk-form-group">
+          <label class="govuk-label" for="email">
+            Email address
+          </label>
+          <input class="govuk-input" id="email" name="email" type="text" autocomplete="email">
+        </div>
+        <div class="govuk-form-group">
+          <label class="govuk-label" for="confirm-email">
+            Confirm email address
+          </label>
+          <input class="govuk-input" id="confirm-email" name="confirm-email" type="text" autocomplete="confirm-email">
+        </div>
+      </fieldset>
+      <button type="submit" class="govuk-button" data-module="govuk-button">
+        Continue
+      </button>
+    </form>
+  </div>
+</div>
+
+<script type="application/json" id="validation-rules">
+  {
+    "email": {
+        "presence": { "allowEmpty": false, "message": "Enter your email address" },
+        "email": { "message": "Enter a valid email address" }
+    },
+    "confirm-email": {
+      "presence": { "allowEmpty": false, "message": "Confirm your email address" },
+      "email": { "message": "Enter a valid email address" },
+      "confirm": { "target": "email", "message": "Email addresses must match" }
+  }
+}
+</script>
+
+{% endblock %}

@@ -36,9 +36,18 @@ export const matchValidator = function (value, options, key, attributes, globalO
         return options.message || "Incorrect password";
       }
     } else {
-      return "Email not found"; // This case should never happen if the email match is working
+      return "Incorrect password"; // This case happens when an unknown email and email is provided
     }
   
     // Valid if the password matches
     return null;
   };
+
+  // Custom 'confirm' validator
+export const confirmValidator = function (value, options, key, attributes, globalOptions) {
+  const targetValue = attributes[options.target];
+  if (value !== targetValue) {
+    return options.message || "Values do not match";
+  }
+  return null;
+};

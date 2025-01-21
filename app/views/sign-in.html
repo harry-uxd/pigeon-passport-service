@@ -9,7 +9,7 @@
 {% block content %}
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-        <form id="sign-in-form" action="/sign-in" method="post">
+        <form action="/sign-in" method="post">
             <fieldset class="govuk-fieldset">
                 <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
                     <h1 class="govuk-fieldset__heading">
@@ -42,7 +42,7 @@
                     <button type="submit" class="govuk-button" data-module="govuk-button">
                         Continue
                     </button>
-                    <a class="govuk-link" href="create-account/email">Create an account</a>
+                    <a class="govuk-link" href="create-account/what-is-your-name">Create an account</a>
                 </div>
         </form>
     </div>
@@ -50,13 +50,13 @@
 <script type="application/json" id="validation-rules">
     {
         "email": {
-            "presence": { "allowEmpty": false, "message": "Email is required" },
+            "presence": { "allowEmpty": false, "message": "Enter your email" },
             "email": { "message": "Enter a valid email address" },
             "match": { "message": "We could not find an account associated with that email address" }
 
         },
         "password": {
-            "presence": { "allowEmpty": false, "message": "Password is required" },
+            "presence": { "allowEmpty": false, "message": "Enter your password" },
             "length": { "minimum": 6, "message": "Password must be at least 6 characters" },
             "authenticate": { "message": "Incorrect password" }
         }

@@ -1,16 +1,31 @@
-import { matchValidator, authenticateValidator } from './custom-validators.js';
-import "@andypf/json-viewer"
+import { matchValidator, authenticateValidator, confirmValidator } from './custom-validators.js';
 
 window.GOVUKPrototypeKit.documentReady(() => {
-  const form = document.getElementById("sign-in-form");
-  const validationRules = JSON.parse(document.getElementById("validation-rules").textContent);
+  const form = document.querySelector("form");
+  const validationRulesElement = document.getElementById("validation-rules");
+
+  if (!validationRulesElement) {
+    console.error("No validation rules found. Please ensure there is a script tag with the JSON validation rules.");
+    return;
+  }
+
+  const validationRules = JSON.parse(validationRulesElement.textContent);
 
   // Register custom validators
   validate.validators.match = matchValidator;
   validate.validators.authenticate = authenticateValidator;
+  validate.validators.confirm = confirmValidator;
 
   // Disable automatic prepending of field names in error messages
   validate.options = { fullMessages: false };
+
+  // Collection of input types for inline error message placement
+  const inlineErrorClasses = [
+    "govuk-radios",
+    "govuk-checkboxes",
+    "govuk-date-input",
+    "govuk-input"
+  ];
 
   form.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -66,15 +81,24 @@ window.GOVUKPrototypeKit.documentReady(() => {
           const errorMessage = document.createElement("span");
           errorMessage.className = "govuk-error-message";
           errorMessage.textContent = errors[fieldName][0];
-          const label = formGroup.querySelector(":scope > label");
-          if (label) {
-            label.insertAdjacentElement("afterend", errorMessage);
-          } else {
-            formGroup.insertBefore(errorMessage, formGroup.firstChild);
+
+          // Check if input has any of the specified classes
+          const hasInlineErrorClass = inlineErrorClasses.some((cls) => input.classList.contains(cls));
+
+          if (hasInlineErrorClass) {
+            const inputWrapper = input.closest(".govuk-input__wrapper") || input;
+            formGroup.insertBefore(errorMessage, inputWrapper);
           }
 
           // Add GOV.UK error styling to the input
-          input.classList.add("govuk-input--error");
+            input.classList.add("govuk-input--error");
+
+            // Remove error styling on valid input
+            input.addEventListener("input", () => {
+            if (input.classList.contains("govuk-input--error")) {
+              input.classList.remove("govuk-input--error");
+            }
+            });
 
           // Add to error summary list
           const errorListItem = document.createElement("li");
@@ -93,9 +117,11 @@ window.GOVUKPrototypeKit.documentReady(() => {
       errorSummaryBody.appendChild(errorSummaryList);
       errorSummary.appendChild(errorSummaryBody);
 
-      // Insert the error summary above the <h1>
-      const heading = form.querySelector("h1");
-      heading.parentNode.insertBefore(errorSummary, heading);
+      // Insert the error summary as the first element in the main HTML element
+      const mainElement = document.querySelector("main");
+      if (mainElement) {
+        mainElement.insertBefore(errorSummary, mainElement.firstChild);
+      }
 
       // Focus the error summary
       errorSummary.focus();

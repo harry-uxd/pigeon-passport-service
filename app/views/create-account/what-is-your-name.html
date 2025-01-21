@@ -6,8 +6,43 @@
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-
+    <form action="/what-is-your-name" method="post" novalidate>
+      <fieldset class="govuk-fieldset">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl govuk-!-padding-bottom-4">
+          <span class="govuk-caption-l">Create an account - Step 1 of 6</span>
+          <h1 class="govuk-fieldset__heading">
+            What is your name?
+          </h1>
+        </legend>
+        <div class="govuk-form-group">
+          <label class="govuk-label" for="first-name">
+            First name
+          </label>
+          <input class="govuk-input" id="first-name" name="first-name" type="text" autocomplete="first-name">
+        </div>
+        <div class="govuk-form-group">
+          <label class="govuk-label" for="last-name">
+            Last name
+          </label>
+          <input class="govuk-input" id="last-name" name="last-name" type="text" autocomplete="last-name">
+        </div>
+      </fieldset>
+      <button type="submit" class="govuk-button" data-module="govuk-button">
+        Continue
+      </button>
+    </form>
   </div>
 </div>
+
+<script type="application/json" id="validation-rules">
+  {
+      "first-name": {
+          "presence": { "allowEmpty": false, "message": "Enter your first name" }
+      },
+      "last-name": {
+        "presence": { "allowEmpty": false, "message": "Enter your last name" }
+    }
+  }
+</script>
 
 {% endblock %}
