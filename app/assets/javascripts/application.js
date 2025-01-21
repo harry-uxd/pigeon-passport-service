@@ -1,4 +1,5 @@
 import { matchValidator, authenticateValidator } from './custom-validators.js';
+import "@andypf/json-viewer"
 
 window.GOVUKPrototypeKit.documentReady(() => {
   const form = document.getElementById("sign-in-form");

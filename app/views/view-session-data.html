@@ -5,17 +5,18 @@
 {% block content %}
 
 <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
+    <div class="govuk-grid-column-full">
         <h1 class="govuk-heading-xl">
             View session data
         </h1>
         <h2 class="govuk-heading-m">User data</h2>
-        {{ data["users"] | dump(2) }}
-        
+        <andypf-json-viewer data='{{ data["users"] | dump }}' theme="monokai" expanded="true" show-data-types="false"
+            show-toolbar="true"></andypf-json-viewer>
         <br>
-
         <h2 class="govuk-heading-m">Pigeon data</h2>
-        {{ data["birds"] | dump(2) }} 
+        <andypf-json-viewer data='{{ data["birds"] | dump }}' theme="monokai" expanded="true" show-data-types="false"
+            show-toolbar="true"></andypf-json-viewer>
+        <!-- See https://www.npmjs.com/package/@andypf/json-viewer for documentation on this JSON viewer -->
     </div>
 </div>
 
