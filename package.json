@@ -9,6 +9,7 @@
     "@govuk-prototype-kit/common-templates": "2.0.1",
     "govuk-frontend": "5.8.0",
     "govuk-prototype-kit": "13.16.2",
+    "luxon": "^3.5.0",
     "validate.js": "^0.13.1"
   }
 }

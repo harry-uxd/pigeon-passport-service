@@ -60,7 +60,6 @@ router.post('/what-is-your-name', function (request, response) {
         password: '',
         name: `${firstName} ${lastName}`,
         dob: '',
-        postcode: '',
         phoneNumber: '',
         address: '',
         preferredContactMethod: '',
@@ -78,45 +77,157 @@ router.post('/what-is-your-name', function (request, response) {
 })
 
 router.post('/what-is-your-email', function (request, response) {
-        // Save the session data and users object to variables for easier access
-        const data = request.session.data
-        const users = data['users']
+    // Save the session data and users object to variables for easier access
+    const data = request.session.data
+    const users = data['users']
 
-        // Get the user ID from the query parameter
-        const currentUserID = data['userID']
+    // Get the user ID from the query parameter
+    const currentUserID = data['userID']
 
-        // Save the current user to a variable
-        const currentUser = users.find(user => user.userID === currentUserID)
-    
-        // Get the email from the form data
-        const email = data['email']
+    // Save the current user to a variable
+    const currentUser = users.find(user => user.userID === currentUserID)
 
-        // Add the email to the current user
-        currentUser.email = email;
+    // Get the email from the form data
+    const email = data['email']
 
-        // Redirect to the next step in the account creation process
-        response.redirect('create-account/enter-your-password?userID=' + currentUserID);
-   
+    // Add the email to the current user
+    currentUser.email = email;
+
+    // Redirect to the next step in the account creation process
+    response.redirect('create-account/enter-your-password?userID=' + currentUserID);
+
 })
 
 router.post('/enter-your-password', function (request, response) {
-        // Save the session data and users object to variables for easier access
-        const data = request.session.data
-        const users = data['users']
+    // Save the session data and users object to variables for easier access
+    const data = request.session.data
+    const users = data['users']
 
-        // Get the user ID from the query parameter
-        const currentUserID = data['userID']
+    // Get the user ID from the query parameter
+    const currentUserID = data['userID']
 
-        // Save the current user to a variable
-        const currentUser = users.find(user => user.userID === currentUserID)
+    // Save the current user to a variable
+    const currentUser = users.find(user => user.userID === currentUserID)
 
-        // Get the password from the form data
-        const password = data['password']
+    // Get the password from the form data
+    const password = data['password']
 
-        // Add the password to the current user
-        currentUser.password = password;
+    // Add the password to the current user
+    currentUser.password = password;
 
-        // Redirect to the next step in the account creation process
-        response.redirect('create-account/what-is-your-date-of-birth?userID=' + currentUserID);
+    // Redirect to the next step in the account creation process
+    response.redirect('create-account/what-is-your-date-of-birth?userID=' + currentUserID);
+
+})
+
+router.post('/what-is-your-date-of-birth', function (request, response) {
+    // Save the session data and users object to variables for easier access
+    const data = request.session.data
+    const users = data['users']
+
+    // Get the user ID from the query parameter
+    const currentUserID = data['userID']
+
+    // Save the current user to a variable
+    const currentUser = users.find(user => user.userID === currentUserID)
+
+    // Get the date values from the form data
+    const day = data['date-of-birth-day']
+    const month = data['date-of-birth-month']
+    const year = data['date-of-birth-year']
+
+    // Add the date of birth to the current user
+    currentUser.dob = `${year}-${month}-${day}`;
+
+    // Redirect to the next step in the account creation process
+    response.redirect('create-account/find-your-address?userID=' + currentUserID);
+
+})
+
+router.post('/what-is-your-address', function (request, response) {
+    // Save the session data and users object to variables for easier access
+    const data = request.session.data
+    const users = data['users']
+
+    // Get the user ID from the query parameter
+    const currentUserID = data['userID']
+
+    // Save the current user to a variable
+    const currentUser = users.find(user => user.userID === currentUserID)
+
+    // Get the date values from the form data
+    const addressLine1 = data['address-line-1']
+    const addressLine2 = data['address-line-2']
+    const addressTown = data['address-town']
+    const addressCounty = data['address-county']
+    const addressPostcode = data['address-postcode']
+
+    // Add to the current user
+    currentUser.address = {
+        line1: addressLine1,
+        line2: addressLine2,
+        town: addressTown,
+        county: addressCounty,
+        postcode: addressPostcode
+    };
+
+    // Redirect to the next step in the account creation process
+    response.redirect('create-account/what-is-your-phone-number?userID=' + currentUserID);
+
+})
+
+router.post('/what-is-your-phone-number', function (request, response) {
+    // Save the session data and users object to variables for easier access
+    const data = request.session.data
+    const users = data['users']
+
+    // Get the user ID from the query parameter
+    const currentUserID = data['userID']
+
+    // Save the current user to a variable
+    const currentUser = users.find(user => user.userID === currentUserID)
+
+    // Get the phone number from the form data
+    const phoneNumber = data['phone-number']
+
+    // Add the phone number to the current user
+    currentUser.phoneNumber = phoneNumber
+
+    // Redirect to the next step in the account creation process
+    response.redirect('create-account/how-would-you-like-to-be-contacted?userID=' + currentUserID);
+
+})
+
+router.post('/how-would-you-like-to-be-contacted', function (request, response) {
+    // Save the session data and users object to variables for easier access
+    const data = request.session.data
+    const users = data['users']
+
+    // Get the user ID from the query parameter
+    const currentUserID = data['userID']
+
+    // Save the current user to a variable
+    const currentUser = users.find(user => user.userID === currentUserID)
+
+    // Get the contact preference from the form data
+    const contactPreference = data['contact-preference']
+
+    // Add the phone number to the current user
+    currentUser.preferredContactMethod = contactPreference
+
+    // Redirect to the next step in the account creation process
+    response.redirect('create-account/check-your-answers?userID=' + currentUserID);
+
+})
+
+router.post('/check-your-answers', function (request, response) {
+    // Save the session data and users object to variables for easier access
+    const data = request.session.data
+
+    // Get the user ID from the query parameter
+    const currentUserID = data['userID']
+
+    // Redirect to the first step in the add a pigeon process
+    response.redirect('add-pigeon/would-you-like-to-add-a-pigeon?userID=' + currentUserID);
 
 })

@@ -1,0 +1,101 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName="Check your answers" %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-xl">Check your answers</h1>
+
+        <!-- TODO figure how to make this an importable module -->
+        {% set currentUser = '' %}
+        {% for user in data.users %}
+        {% if user.userID == data.userID %}
+        {% set currentUser = user %}
+        {% endif %}
+        {% endfor %}
+
+        <dl class="govuk-summary-list">
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Name
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{ currentUser.name }}
+                </dd>
+                <dd class="govuk-summary-list__actions">
+                    <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> name</span></a>
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Date of birth
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{ currentUser.dob | longDate }}
+                </dd>
+                <dd class="govuk-summary-list__actions">
+                    <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> date of
+                            birth</span></a>
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Email
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{ currentUser.email }}
+                </dd>
+                <dd class="govuk-summary-list__actions">
+                    <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> customer
+                            reference</span></a>
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Address
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {% for key, value in currentUser.address %}
+                    <p class="govuk-body">{{ value }}</p>
+                    {% endfor %}
+                </dd>
+                <dd class="govuk-summary-list__actions">
+                    <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> address</span></a>
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Phone number
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{ currentUser.phoneNumber }}
+                </dd>
+                <dd class="govuk-summary-list__actions">
+                    <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> contact
+                            details</span></a>
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Contact preference
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{ currentUser.preferredContactMethod }}
+                </dd>
+                <dd class="govuk-summary-list__actions">
+                    <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> contact
+                            details</span></a>
+                </dd>
+            </div>
+        </dl>
+        <form action="/check-your-answers" method="post" novalidate>
+            <input type="hidden" name="answers-checked" value="true">
+            <button type="submit" class="govuk-button" data-module="govuk-button">
+                Save and continue
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

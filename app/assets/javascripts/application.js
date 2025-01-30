@@ -1,4 +1,4 @@
-import { matchValidator, authenticateValidator, confirmValidator } from './custom-validators.js';
+import { matchValidator, authenticateValidator, confirmValidator, dateValidator } from './custom-validators.js';
 
 window.GOVUKPrototypeKit.documentReady(() => {
   const form = document.querySelector("form");
@@ -15,6 +15,7 @@ window.GOVUKPrototypeKit.documentReady(() => {
   validate.validators.match = matchValidator;
   validate.validators.authenticate = authenticateValidator;
   validate.validators.confirm = confirmValidator;
+  validate.validators.date = dateValidator;
 
   // Disable automatic prepending of field names in error messages
   validate.options = { fullMessages: false };
@@ -38,9 +39,11 @@ window.GOVUKPrototypeKit.documentReady(() => {
 
     // Clear previous errors
     document.querySelectorAll(".govuk-form-group").forEach((group) => {
-      group.classList.remove("govuk-form-group--error");
-      const error = group.querySelector(".govuk-error-message");
-      if (error) error.remove();
+      if (group) {
+        group.classList.remove("govuk-form-group--error");
+        const error = group.querySelector(".govuk-error-message");
+        if (error) error.remove();
+      }
     });
 
     // Remove previous error summary (if it exists)
@@ -50,7 +53,6 @@ window.GOVUKPrototypeKit.documentReady(() => {
     }
 
     if (errors) {
-      console.log(errors);
       // Create error summary dynamically
       const errorSummary = document.createElement("div");
       errorSummary.className = "govuk-error-summary";
@@ -73,22 +75,38 @@ window.GOVUKPrototypeKit.documentReady(() => {
 
       Object.keys(errors).forEach((fieldName) => {
         const input = form.querySelector(`[name="${fieldName}"]`);
-        const formGroup = input.closest(".govuk-form-group");
+        console.log(input);
+        let formGroup;
+        if (input.classList.contains("govuk-date-input__input")) {
+          const parentFormGroup = input.closest(".govuk-form-group")?.parentElement;
+          formGroup = parentFormGroup ? parentFormGroup.closest(".govuk-form-group") : null;
+        } else {
+          formGroup = input.closest(".govuk-form-group");
+        }
 
         if (formGroup) {
-          // Add inline error
-          formGroup.classList.add("govuk-form-group--error");
-          const errorMessage = document.createElement("span");
-          errorMessage.className = "govuk-error-message";
-          errorMessage.textContent = errors[fieldName][0];
+            // Add inline error
+            formGroup.classList.add("govuk-form-group--error");
+            const errorMessage = document.createElement("span");
+            errorMessage.className = "govuk-error-message";
+            errorMessage.textContent = errors[fieldName][0];
 
-          // Check if input has any of the specified classes
-          const hasInlineErrorClass = inlineErrorClasses.some((cls) => input.classList.contains(cls));
+            // Check if input has any of the specified classes
+            const hasInlineErrorClass = inlineErrorClasses.some((cls) => input.classList.contains(cls));
 
-          if (hasInlineErrorClass) {
-            const inputWrapper = input.closest(".govuk-input__wrapper") || input;
-            formGroup.insertBefore(errorMessage, inputWrapper);
-          }
+            if (hasInlineErrorClass) {
+            if (input.classList.contains("govuk-date-input__input")) {
+              // Special case for govuk-date-input
+              const dateInputContainer = input.closest(".govuk-date-input");
+              if (dateInputContainer) {
+                dateInputContainer.insertBefore(errorMessage, dateInputContainer.firstChild);
+              }
+
+            } else {
+              const inputWrapper = input.closest(".govuk-input__wrapper") || input;
+              formGroup.insertBefore(errorMessage, inputWrapper);
+            }
+            }
 
           // Add GOV.UK error styling to the input
             input.classList.add("govuk-input--error");

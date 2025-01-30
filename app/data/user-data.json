@@ -1,0 +1,74 @@
+[
+    {
+        "userID": "c8e1e4d5b3b0",
+        "email": "jane.smith@example.com",
+        "password": "securepass456",
+        "name": "Jane Smith",
+        "dob": "1992-07-08",
+        "phoneNumber": "07987654321",
+        "address": {
+            "line1": "Apartment 4",
+            "line2": "22 Pigeon Street",
+            "town": "Birmingham",
+            "county": "West Midlands",
+            "postcode": "B1 1AA"
+        },
+        "preferredContactMethod": "phone",
+        "accountCreated": "2025-01-05",
+        "pigeonCount": 6
+    },
+    {
+        "userID": "8b0d95cf744f",
+        "email": "alice.wright@example.com",
+        "password": "mypassword789",
+        "name": "Alice Wright",
+        "dob": "1975-03-25",
+        "phoneNumber": "07711223344",
+        "address": {
+            "line1": "Flat 10",
+            "line2": "3 Bird Lane",
+            "town": "Manchester",
+            "county": "Greater Manchester",
+            "postcode": "M1 2AB"
+        },
+        "preferredContactMethod": "email",
+        "accountCreated": "2023-06-20",
+        "pigeonCount": 5
+    },
+    {
+        "userID": "0cb7c6da80ff",
+        "email": "bob.johnson@example.com",
+        "password": "letmein321",
+        "name": "Bob Johnson",
+        "dob": "1969-11-15",
+        "phoneNumber": "07544332211",
+        "address": {
+            "line1": "16 Feather Way",
+            "line2": "",
+            "town": "Leeds",
+            "county": "West Yorkshire",
+            "postcode": "LS1 4AA"
+        },
+        "preferredContactMethod": "email",
+        "accountCreated": "2024-04-10",
+        "pigeonCount": 8
+    },
+    {
+        "userID": "dc9838b399b5",
+        "email": "charlie.evans@example.com",
+        "password": "pigeonlover",
+        "name": "Charlie Evans",
+        "dob": "2000-02-18",
+        "phoneNumber": "07894561234",
+        "address": {
+            "line1": "5 Wing Crescent",
+            "line2": "",
+            "town": "Edinburgh",
+            "county": "",
+            "postcode": "EH1 1YZ"
+        },
+        "preferredContactMethod": "phone",
+        "accountCreated": "2022-09-15",
+        "pigeonCount": 4
+    }
+]

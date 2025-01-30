@@ -9,8 +9,8 @@
     <form action="/what-is-your-date-of-birth" method="post" novalidate>
       <div class="govuk-form-group">
         <fieldset class="govuk-fieldset" role="group" aria-describedby="date-of-birth-hint">
-          <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl govuk-!-padding-bottom-4">
-          <span class="govuk-caption-l">Create an account - Step 3 of 6</span>
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+          <span class="govuk-caption-l">Create an account - Step 3 of 7</span>
             <h1 class="govuk-fieldset__heading">
               What is your date of birth?
             </h1>
@@ -55,5 +55,27 @@
     </form>
   </div>
 </div>
+
+<script type="application/json" id="validation-rules">
+  {
+    "date-of-birth-day": {
+      "presence": { "allowEmpty": false, "message": "Enter the day of your date of birth" }
+    },
+    "date-of-birth-month": {
+      "presence": { "allowEmpty": false, "message": "Enter the month of your date of birth" }
+    },
+    "date-of-birth-year": {
+      "presence": { "allowEmpty": false, "message": "Enter the year of your date of birth" }
+    },
+    "date-of-birth": {
+      "date": {
+        "dayField": "date-of-birth-day",
+        "monthField": "date-of-birth-month",
+        "yearField": "date-of-birth-year",
+        "message": "Enter a valid date of birth"
+      }
+    }
+  }
+</script>
 
 {% endblock %}
