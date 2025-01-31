@@ -2,15 +2,13 @@
 <p>Test</p>
 {% endmacro %}
 
+{# This takes the data object as an input and returns the user #}
+{# Annoyingly it returns a string, not a JSON object so there is a return filter to manage this #}
 {% macro getCurrentUser(data) %}
     {% for user in data.users %}
         {% if user.userID == data.userID%}
             {% set returnVar = user | dump | safe %}  
-            {# <p>{{user | dump}}</p> #}
             {{ returnVar }}
         {% endif %}
     {% endfor %}
-
-
-{# {{data.userID}} #}
 {% endmacro %}
