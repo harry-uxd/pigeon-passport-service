@@ -14,3 +14,7 @@ https://prototype-kit.service.gov.uk/docs/how-to-use-layouts
 
 {% block beforeContent %}
 {% endblock %}
+
+<!-- Import my macro and set currentUser -->
+{% import "/macros/components.njk" as components %}
+{% set currentUser = components.getCurrentUser(data) %}

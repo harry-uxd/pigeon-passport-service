@@ -1,0 +1,16 @@
+{% macro test() %}
+<p>Test</p>
+{% endmacro %}
+
+{% macro getCurrentUser(data) %}
+    {% for user in data.users %}
+        {% if user.userID == data.userID%}
+            {% set returnVar = user | dump | safe %}  
+            {# <p>{{user | dump}}</p> #}
+            {{ returnVar }}
+        {% endif %}
+    {% endfor %}
+
+
+{# {{data.userID}} #}
+{% endmacro %}

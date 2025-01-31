@@ -13,3 +13,12 @@ addFilter('longDate', (dateString) => {
     const date = DateTime.fromISO(dateString);
     return date.toFormat('d MMMM yyyy');
 });
+
+addFilter('return', (jsonString, key) => {
+    try {
+        const json = JSON.parse(jsonString);
+        return json[key];
+    } catch (e) {
+        return null;
+    }
+});

@@ -8,21 +8,13 @@
     <div class="govuk-grid-column-two-thirds">
         <h1 class="govuk-heading-xl">Check your answers</h1>
 
-        <!-- TODO figure how to make this an importable module -->
-        {% set currentUser = '' %}
-        {% for user in data.users %}
-        {% if user.userID == data.userID %}
-        {% set currentUser = user %}
-        {% endif %}
-        {% endfor %}
-
         <dl class="govuk-summary-list">
             <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
                     Name
                 </dt>
                 <dd class="govuk-summary-list__value">
-                    {{ currentUser.name }}
+                    {{ currentUser | return('name') }}
                 </dd>
                 <dd class="govuk-summary-list__actions">
                     <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> name</span></a>
@@ -33,7 +25,7 @@
                     Date of birth
                 </dt>
                 <dd class="govuk-summary-list__value">
-                    {{ currentUser.dob | longDate }}
+                    {{ currentUser | return('dob') | longDate }}
                 </dd>
                 <dd class="govuk-summary-list__actions">
                     <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> date of
@@ -45,7 +37,7 @@
                     Email
                 </dt>
                 <dd class="govuk-summary-list__value">
-                    {{ currentUser.email }}
+                    {{ currentUser | return('email') }}
                 </dd>
                 <dd class="govuk-summary-list__actions">
                     <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> customer
@@ -57,7 +49,8 @@
                     Address
                 </dt>
                 <dd class="govuk-summary-list__value">
-                    {% for key, value in currentUser.address %}
+                    {% set address = currentUser | return('address') %}
+                    {% for key, value in address %}
                     <p class="govuk-body">{{ value }}</p>
                     {% endfor %}
                 </dd>
@@ -71,6 +64,7 @@
                 </dt>
                 <dd class="govuk-summary-list__value">
                     {{ currentUser.phoneNumber }}
+                    {{ currentUser | return('phoneNumber') }}
                 </dd>
                 <dd class="govuk-summary-list__actions">
                     <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> contact
@@ -82,7 +76,7 @@
                     Contact preference
                 </dt>
                 <dd class="govuk-summary-list__value">
-                    {{ currentUser.preferredContactMethod }}
+                    {{ currentUser | return('preferredContactMethod') }}
                 </dd>
                 <dd class="govuk-summary-list__actions">
                     <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> contact
