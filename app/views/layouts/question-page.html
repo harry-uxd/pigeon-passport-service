@@ -7,10 +7,12 @@ https://prototype-kit.service.gov.uk/docs/how-to-use-layouts
 
 {% block scripts %}
 {{ super() }}
-
-<script src="https://pfau-software.de/json-viewer/dist/iife/index.js"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/validate.js/0.13.1/validate.min.js"></script>
+<script>
+  const sessionData = {{ data | dump | safe }}
+</script>
 {% endblock %}
 
 {% block beforeContent %}
+<a href="#" class="govuk-back-link">Back</a>
 {% endblock %}
