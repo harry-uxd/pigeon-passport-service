@@ -9,7 +9,10 @@
     <form action="/what-is-your-name" method="post" novalidate>
       <fieldset class="govuk-fieldset">
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl govuk-!-padding-bottom-4">
+          <!-- Only show the steps on the first way through -->
+          {% if not data['origin'] %}
           <span class="govuk-caption-l">Create an account - Step 1 of 7</span>
+          {% endif %}
           <h1 class="govuk-fieldset__heading">
             What is your name?
           </h1>
@@ -18,13 +21,13 @@
           <label class="govuk-label" for="first-name">
             First name
           </label>
-          <input class="govuk-input" id="first-name" name="first-name" type="text" autocomplete="first-name">
+          <input class="govuk-input" id="first-name" name="first-name" type="text" autocomplete="first-name" value="{{ currentUser | return('firstName') }}">
         </div>
         <div class="govuk-form-group">
           <label class="govuk-label" for="last-name">
             Last name
           </label>
-          <input class="govuk-input" id="last-name" name="last-name" type="text" autocomplete="last-name">
+          <input class="govuk-input" id="last-name" name="last-name" type="text" autocomplete="last-name" value="{{ currentUser | return('lastName') }}">
         </div>
       </fieldset>
       <button type="submit" class="govuk-button" data-module="govuk-button">

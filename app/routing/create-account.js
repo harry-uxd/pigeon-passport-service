@@ -43,28 +43,43 @@ router.post('/what-is-your-name', function (request, response) {
     const firstName = data['first-name']
     const lastName = data['last-name']
 
-    // Initialise the user object
-    // We create the userID, name and accountCreated properties here. 
-    // The rest of these will be added on later pages
-    const user = {
-        userID: [...Array(12)].map(() => Math.floor(Math.random() * 16).toString(16)).join(''),
-        email: '',
-        password: '',
-        name: `${firstName} ${lastName}`,
-        dob: '',
-        phoneNumber: '',
-        address: '',
-        preferredContactMethod: '',
-        accountCreated: new Date().toISOString().split('T')[0], // Current date in YYYY-MM-DD format
-        pigeonCount: 0
-    }
+    // Check if the user has already been created
+    let user = users.find(user => user.userID === data['userID']);
 
-    // Add the new user to the top of the users list
-    users.unshift(user);
+    if (user) {
+        // Update the first and last name if the user already exists
+        user.firstName = firstName;
+        user.lastName = lastName;
+    } else {
+        // Initialise the new user object
+        // We create the userID, name and accountCreated properties here. 
+        // The rest of these will be added on later pages
+        user = {
+            userID: [...Array(12)].map(() => Math.floor(Math.random() * 16).toString(16)).join(''),
+            email: '',
+            password: '',
+            firstName: firstName,
+            lastName: lastName,
+            dob: '',
+            phoneNumber: '',
+            address: '',
+            preferredContactMethod: '',
+            accountCreated: new Date().toISOString().split('T')[0], // Current date in YYYY-MM-DD format
+            pigeonCount: 0
+        }
+
+        // Add the new user to the top of the users list
+        users.unshift(user);
+    }
 
     // Redirect to the next step in the account creation process
     // Add a url query parameter so we know who the 'current' user is
-    response.redirect('create-account/what-is-your-email?userID=' + user.userID);
+    // Check to see if this page has been reached from the check your answers page
+    if (data['origin'] === 'check-your-answers') {
+        response.redirect('create-account/check-your-answers?userID=' + user.userID);
+    } else {
+        response.redirect('create-account/what-is-your-email?userID=' + user.userID);
+    }
 
 })
 

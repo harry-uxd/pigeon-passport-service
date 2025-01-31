@@ -3,7 +3,8 @@
         "userID": "c8e1e4d5b3b0",
         "email": "jane.smith@example.com",
         "password": "securepass456",
-        "name": "Jane Smith",
+        "firstName": "Jane",
+        "lastName": "Smith",
         "dob": "1992-07-08",
         "phoneNumber": "07987654321",
         "address": {
@@ -21,7 +22,8 @@
         "userID": "8b0d95cf744f",
         "email": "alice.wright@example.com",
         "password": "mypassword789",
-        "name": "Alice Wright",
+        "firstName": "Alice",
+        "lastName": "Wright",
         "dob": "1975-03-25",
         "phoneNumber": "07711223344",
         "address": {
@@ -39,7 +41,8 @@
         "userID": "0cb7c6da80ff",
         "email": "bob.johnson@example.com",
         "password": "letmein321",
-        "name": "Bob Johnson",
+        "firstName": "Bob",
+        "lastName": "Johnson",
         "dob": "1969-11-15",
         "phoneNumber": "07544332211",
         "address": {
@@ -57,7 +60,8 @@
         "userID": "dc9838b399b5",
         "email": "charlie.evans@example.com",
         "password": "pigeonlover",
-        "name": "Charlie Evans",
+        "firstName": "Charlie",
+        "lastName": "Evans",
         "dob": "2000-02-18",
         "phoneNumber": "07894561234",
         "address": {

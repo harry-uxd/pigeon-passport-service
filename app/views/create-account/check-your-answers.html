@@ -14,10 +14,10 @@
                     Name
                 </dt>
                 <dd class="govuk-summary-list__value">
-                    {{ currentUser | return('name') }}
+                    {{ currentUser | return('firstName') }} {{ currentUser | return('lastName') }} 
                 </dd>
                 <dd class="govuk-summary-list__actions">
-                    <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> name</span></a>
+                    <a class="govuk-link" href="what-is-your-name?userID={{ data['userID'] }}&origin=check-your-answers">Change<span class="govuk-visually-hidden"> name</span></a>
                 </dd>
             </div>
             <div class="govuk-summary-list__row">
