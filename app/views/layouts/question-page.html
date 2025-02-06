@@ -11,10 +11,11 @@ https://prototype-kit.service.gov.uk/docs/how-to-use-layouts
 <script>
   const sessionData = {{ data | dump | safe }}
 </script>
+<script src="https://pfau-software.de/json-viewer/dist/iife/index.js"></script>
 {% endblock %}
 
 {% block beforeContent %}
-<a href="#" class="govuk-back-link">Back</a>
+<a href="#" class="govuk-back-link" onclick="history.back(); return false;">Back</a>
 {% endblock %}
 
 <!-- Import my macros and set currentUser variable -->

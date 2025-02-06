@@ -1,0 +1,230 @@
+{% extends "layouts/question-page.html" %}
+
+{% set pageName="Apply for a pigeon passport" %}
+
+{% block pageScripts %}
+
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+        <h1 class="govuk-heading-xl">Admin Dashboard</h1>
+    </div>
+</div>
+<div class="govuk-grid-row govuk-!-padding-bottom-8">
+
+    <div class="govuk-grid-column-one-half">
+        <div>
+            <canvas id="pigeonBreed"></canvas>
+        </div>
+    </div>
+    <div class="govuk-grid-column-one-half">
+        <div>
+            <canvas id="pigeonAge" style="height: 464px"></canvas>
+        </div>
+    </div>
+</div>
+<div class="govuk-grid-row">
+
+    <div class="govuk-grid-column-one-half">
+        <div>
+            <canvas id="pigeonSex"></canvas>
+        </div>
+    </div>
+    <div class="govuk-grid-column-one-half">
+        <div>
+            <canvas id="pigeonVaccinationStatus"></canvas>
+        </div>
+    </div>
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    const sessionData = {{ data | dump | safe }};
+
+    // Pigeon Breed Chart
+    const pigeonBreedChart = document.getElementById('pigeonBreed');
+
+    const pigeonCounts = sessionData.pigeons.reduce((acc, pigeon) => {
+        acc[pigeon.breed] = (acc[pigeon.breed] || 0) + 1;
+        return acc;
+    }, {});
+
+    const pigeonData = Object.keys(pigeonCounts).map(breed => ({
+        type: breed,
+        count: pigeonCounts[breed]
+    }));
+
+    new Chart(pigeonBreedChart, {
+        type: 'doughnut',
+        data: {
+            labels: pigeonData.map(pigeon => pigeon.type),
+            datasets: [{
+                label: 'Number of registered pigeons',
+                data: pigeonData.map(pigeon => pigeon.count),
+                borderWidth: 1
+            }]
+        },
+        options: {
+            plugins: {
+                title: {
+                    color: "#0b0c0c",
+                    display: true,
+                    text: 'Pigeon breeds',
+                    padding: {
+                        bottom: 20
+                    },
+                    align: "start",
+                    font: {
+                        size: 24,
+                        family: "'GDS Transport', Arial, sans-serif",
+                        weight: "bold"
+                    }
+                }
+            }
+        }
+    });
+
+    // Pigeon Age Chart
+    const pigeonAgeChart = document.getElementById('pigeonAge');
+
+    const pigeonAges = sessionData.pigeons.reduce((acc, pigeon) => {
+        acc[pigeon.age] = (acc[pigeon.age] || 0) + 1;
+        return acc;
+    }, {});
+
+    const pigeonAgeData = Object.keys(pigeonAges).map(age => ({
+        age: age,
+        count: pigeonAges[age]
+    }));
+
+    new Chart(pigeonAgeChart, {
+        type: 'bar',
+        data: {
+            labels: pigeonAgeData.map(pigeon => `${pigeon.age} years`),
+            datasets: [{
+                label: 'Number of pigeons',
+                data: pigeonAgeData.map(pigeon => pigeon.count),
+                borderWidth: 1,
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)'
+            }]
+        },
+        options: {
+            maintainAspectRatio: false,
+            indexAxis: 'y',
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            },
+            plugins: {
+                title: {
+                    color: "#0b0c0c",
+                    display: true,
+                    text: 'Pigeon ages',
+                    padding: {
+                        bottom: 20
+                    },
+                    align: "start",
+                    font: {
+                        size: 24,
+                        family: "'GDS Transport', Arial, sans-serif",
+                        weight: "bold"
+                    }
+                }
+            }
+        }
+    });
+
+    // Pigeon Sex Chart
+    const pigeonSexChart = document.getElementById('pigeonSex');
+
+    const pigeonSexCounts = sessionData.pigeons.reduce((acc, pigeon) => {
+        acc[pigeon.sex] = (acc[pigeon.sex] || 0) + 1;
+        return acc;
+    }, {});
+
+    const pigeonSexData = Object.keys(pigeonSexCounts).map(sex => ({
+        sex: sex,
+        count: pigeonSexCounts[sex]
+    }));
+
+    new Chart(pigeonSexChart, {
+        type: 'doughnut',
+        data: {
+            labels: pigeonSexData.map(pigeon => pigeon.sex),
+            datasets: [{
+                label: 'Number of pigeons by sex',
+                data: pigeonSexData.map(pigeon => pigeon.count),
+                borderWidth: 1
+            }]
+        },
+        options: {
+            plugins: {
+                title: {
+                    color: "#0b0c0c",
+                    display: true,
+                    text: 'Pigeon sex',
+                    padding: {
+                        bottom: 20
+                    },
+                    align: "start",
+                    font: {
+                        size: 24,
+                        family: "'GDS Transport', Arial, sans-serif",
+                        weight: "bold"
+                    }
+                }
+            }
+        }
+    });
+
+    // Pigeon Vaccination Status Chart
+    const pigeonVaccinationStatusChart = document.getElementById('pigeonVaccinationStatus');
+
+    const pigeonVaccinationStatusCounts = sessionData.pigeons.reduce((acc, pigeon) => {
+        acc[pigeon.vaccinationStatus] = (acc[pigeon.vaccinationStatus] || 0) + 1;
+        return acc;
+    }, {});
+
+    const pigeonVaccinationStatusData = Object.keys(pigeonVaccinationStatusCounts).map(status => ({
+        status: status,
+        count: pigeonVaccinationStatusCounts[status]
+    }));
+
+    new Chart(pigeonVaccinationStatusChart, {
+        type: 'doughnut',
+        data: {
+            labels: pigeonVaccinationStatusData.map(pigeon => pigeon.status),
+            datasets: [{
+                label: 'Number of pigeons by vaccination status',
+                data: pigeonVaccinationStatusData.map(pigeon => pigeon.count),
+                borderWidth: 1
+            }]
+        },
+        options: {
+            plugins: {
+                title: {
+                    color: "#0b0c0c",
+                    display: true,
+                    text: 'Pigeon vaccination status',
+                    padding: {
+                        bottom: 20
+                    },
+                    align: "start",
+                    font: {
+                        size: 24,
+                        family: "'GDS Transport', Arial, sans-serif",
+                        weight: "bold"
+                    }
+                }
+            }
+        }
+    });
+</script>
+{% endblock %}

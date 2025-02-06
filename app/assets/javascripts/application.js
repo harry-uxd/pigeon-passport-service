@@ -1,6 +1,8 @@
 import { matchValidator, authenticateValidator, confirmValidator, dateValidator } from './custom-validators.js';
 
 window.GOVUKPrototypeKit.documentReady(() => {
+
+  // Setup form validation
   const form = document.querySelector("form");
   const validationRulesElement = document.getElementById("validation-rules");
 
@@ -85,16 +87,16 @@ window.GOVUKPrototypeKit.documentReady(() => {
         }
 
         if (formGroup) {
-            // Add inline error
-            formGroup.classList.add("govuk-form-group--error");
-            const errorMessage = document.createElement("span");
-            errorMessage.className = "govuk-error-message";
-            errorMessage.textContent = errors[fieldName][0];
+          // Add inline error
+          formGroup.classList.add("govuk-form-group--error");
+          const errorMessage = document.createElement("span");
+          errorMessage.className = "govuk-error-message";
+          errorMessage.textContent = errors[fieldName][0];
 
-            // Check if input has any of the specified classes
-            const hasInlineErrorClass = inlineErrorClasses.some((cls) => input.classList.contains(cls));
+          // Check if input has any of the specified classes
+          const hasInlineErrorClass = inlineErrorClasses.some((cls) => input.classList.contains(cls));
 
-            if (hasInlineErrorClass) {
+          if (hasInlineErrorClass) {
             if (input.classList.contains("govuk-date-input__input")) {
               // Special case for govuk-date-input
               const dateInputContainer = input.closest(".govuk-date-input");
@@ -106,17 +108,17 @@ window.GOVUKPrototypeKit.documentReady(() => {
               const inputWrapper = input.closest(".govuk-input__wrapper") || input;
               formGroup.insertBefore(errorMessage, inputWrapper);
             }
-            }
+          }
 
           // Add GOV.UK error styling to the input
-            input.classList.add("govuk-input--error");
+          input.classList.add("govuk-input--error");
 
-            // Remove error styling on valid input
-            input.addEventListener("input", () => {
+          // Remove error styling on valid input
+          input.addEventListener("input", () => {
             if (input.classList.contains("govuk-input--error")) {
               input.classList.remove("govuk-input--error");
             }
-            });
+          });
 
           // Add to error summary list
           const errorListItem = document.createElement("li");

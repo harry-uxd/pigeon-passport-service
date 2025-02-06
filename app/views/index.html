@@ -5,15 +5,64 @@
 {% block content %}
 
 <div class="govuk-grid-row">
-  <div class="govuk-grid-column-two-thirds">
-
-    {% include "govuk-prototype-kit/includes/homepage-top.njk" %}
+  <div class="govuk-grid-column-three-quarters">
 
     <h1 class="govuk-heading-xl">
       {{ serviceName }}
     </h1>
+    <p class="govuk-body-l">Take flight with peace of mind, knowing your feathered friends are fully bird-law compliant.
+    </p>
 
-    {% include "govuk-prototype-kit/includes/homepage-bottom.njk" %}
+    <h2 class="govuk-heading-l">Journeys</h2>
+    <div class="card-group">
+      <a href="create-account/what-is-your-name" class="card">
+        <div class="card__content">
+          <h2 class="card__heading govuk-heading-m">Create account</h2>
+          <p class="govuk-body">Create a new user account for this service</p>
+        </div>
+      </a>
+
+      <a href="#" class="card">
+        <div class="card__content">
+          <h2 class="card__heading govuk-heading-m">Add pigeon</h2>
+          <p class="govuk-body">🚧 Under construction 🚧</p>
+        </div>
+      </a>
+    </div>
+    <h2 class="govuk-heading-l">Pages</h2>
+    <div class="card-group">
+      <a href="admin/index" class="card">
+        <div class="card__content">
+          <h2 class="card__heading govuk-heading-m">Admin dashboard</h2>
+          <p class="govuk-body">Statistics about users and their pigeons</p>
+        </div>
+      </a>
+
+      <a href="#" class="card">
+        <div class="card__content">
+          <h2 class="card__heading govuk-heading-m">User home page</h2>
+          <p class="govuk-body">🚧 Under construction 🚧</p>
+        </div>
+      </a>
+    </div>
+  </div>
+  <div class="govuk-grid-column-one-quarter">
+    <h2 class="govuk-heading-m">Prototype admin</h2>
+    <ul class="govuk-list">
+      <li>
+        <a href="/manage-prototype">Manage your prototype</a>
+
+      </li>
+      <li>
+        <a href="/view-session-data">View session data</a>
+      </li>
+      <li>
+        <a href="#">GitHub repository</a>
+
+      </li>
+    </ul>
+
+
   </div>
 </div>
 

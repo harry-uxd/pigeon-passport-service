@@ -100,6 +100,7 @@ router.post('/what-is-your-email', function (request, response) {
     // Add the email to the current user
     currentUser.email = email;
 
+    // TODO do the check answers redirect stuff
     // Redirect to the next step in the account creation process
     response.redirect('create-account/enter-your-password?userID=' + currentUserID);
 

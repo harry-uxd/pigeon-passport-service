@@ -1,0 +1,40 @@
+.card-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding-bottom: 40px;
+}
+
+.card {
+    background-color: #f3f2f1;
+    border-top: 8px solid #1d70b8;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    text-decoration: none;
+    color: inherit;
+    max-width: 45%;
+
+    &:hover {
+        background-color: darken(#f3f2f1, 5%);
+    }
+
+    &__image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+
+    &__content {
+        padding: 1rem;
+    }
+}
+
+.card--highlight {
+    border: 4px solid #ffdd00 !important;
+    border-top: 8px solid #1d70b8;
+
+    background-color: #f3f2f1 !important;
+
+    box-shadow: none !important;
+}

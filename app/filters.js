@@ -24,3 +24,15 @@ addFilter('return', (jsonString, key) => {
         return null;
     }
 });
+
+addFilter('cleanseSession', (sessionJson) => {
+    console.log(sessionJson)
+    try {
+        const session = JSON.parse(sessionJson);
+        delete session.data.users;
+        delete session.data.pigeons;
+        return JSON.stringify(session);
+    } catch (e) {
+        return null;
+    }
+});
