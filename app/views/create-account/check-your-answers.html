@@ -28,7 +28,7 @@
                     {{ currentUser | return('dob') | longDate }}
                 </dd>
                 <dd class="govuk-summary-list__actions">
-                    <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> date of
+                    <a class="govuk-link" href="what-is-your-date-of-birth?userID={{ data['userID'] }}&origin=check-your-answers">Change<span class="govuk-visually-hidden"> date of
                             birth</span></a>
                 </dd>
             </div>
@@ -40,7 +40,7 @@
                     {{ currentUser | return('email') }}
                 </dd>
                 <dd class="govuk-summary-list__actions">
-                    <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> customer
+                    <a class="govuk-link" href="what-is-your-email?userID={{ data['userID'] }}&origin=check-your-answers">Change<span class="govuk-visually-hidden"> customer
                             reference</span></a>
                 </dd>
             </div>
@@ -55,7 +55,7 @@
                     {% endfor %}
                 </dd>
                 <dd class="govuk-summary-list__actions">
-                    <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> address</span></a>
+                    <a class="govuk-link" href="what-is-your-address?userID={{ data['userID'] }}&origin=check-your-answers">Change<span class="govuk-visually-hidden"> address</span></a>
                 </dd>
             </div>
             <div class="govuk-summary-list__row">
@@ -67,7 +67,7 @@
                     {{ currentUser | return('phoneNumber') }}
                 </dd>
                 <dd class="govuk-summary-list__actions">
-                    <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> contact
+                    <a class="govuk-link" href="what-is-your-phone-number?userID={{ data['userID'] }}&origin=check-your-answers">Change<span class="govuk-visually-hidden"> contact
                             details</span></a>
                 </dd>
             </div>
@@ -79,7 +79,7 @@
                     {{ currentUser | return('preferredContactMethod') }}
                 </dd>
                 <dd class="govuk-summary-list__actions">
-                    <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> contact
+                    <a class="govuk-link" href="how-would-you-like-to-be-contacted?userID={{ data['userID'] }}&origin=check-your-answers">Change<span class="govuk-visually-hidden"> contact
                             details</span></a>
                 </dd>
             </div>

@@ -36,3 +36,10 @@ addFilter('cleanseSession', (sessionJson) => {
         return null;
     }
 });
+
+addFilter('lstrip', (str, char) => {
+    if (str.startsWith(char)) {
+        return str.slice(1);
+    }
+    return str;
+});

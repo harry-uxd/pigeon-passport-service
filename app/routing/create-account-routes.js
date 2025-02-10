@@ -76,9 +76,11 @@ router.post('/what-is-your-name', function (request, response) {
     // Add a url query parameter so we know who the 'current' user is
     // Check to see if this page has been reached from the check your answers page
     if (data['origin'] === 'check-your-answers') {
-        response.redirect('create-account/check-your-answers?userID=' + user.userID);
+        response.redirect(`create-account/check-your-answers?userID=${user.userID}`);
+    } else if (data['origin'] === 'homepage') {
+        response.redirect(`user/homepage?userID=${user.userID}#your-details`);
     } else {
-        response.redirect('create-account/what-is-your-email?userID=' + user.userID);
+        response.redirect(`create-account/what-is-your-email?userID=${user.userID}`);
     }
 
 })
@@ -100,9 +102,14 @@ router.post('/what-is-your-email', function (request, response) {
     // Add the email to the current user
     currentUser.email = email;
 
-    // TODO do the check answers redirect stuff
     // Redirect to the next step in the account creation process
-    response.redirect('create-account/enter-your-password?userID=' + currentUserID);
+    if (data['origin'] === 'check-your-answers') {
+        response.redirect(`create-account/check-your-answers?userID=${currentUser.userID}`);
+    } else if (data['origin'] === 'homepage') {
+        response.redirect(`user/homepage?userID=${currentUser.userID}#your-details`);
+    } else {
+        response.redirect(`create-account/enter-your-password?userID=${currentUser.userID}`);
+    }
 
 })
 
@@ -124,7 +131,15 @@ router.post('/enter-your-password', function (request, response) {
     currentUser.password = password;
 
     // Redirect to the next step in the account creation process
-    response.redirect('create-account/what-is-your-date-of-birth?userID=' + currentUserID);
+    if (data['origin'] === 'check-your-answers') {
+        response.redirect(`create-account/check-your-answers?userID=${currentUser.userID}`);
+    } else if (data['origin'] === 'homepage') {
+        response.redirect(`user/homepage?userID=${currentUser.userID}#your-details`);
+    } else {
+        response.redirect(`create-account/what-is-your-date-of-birth?userID=${currentUser.userID}`);
+    }
+
+
 
 })
 
@@ -138,17 +153,30 @@ router.post('/what-is-your-date-of-birth', function (request, response) {
 
     // Save the current user to a variable
     const currentUser = users.find(user => user.userID === currentUserID)
-
     // Get the date values from the form data
-    const day = data['date-of-birth-day']
-    const month = data['date-of-birth-month']
+    let day = data['date-of-birth-day']
+    let month = data['date-of-birth-month']
     const year = data['date-of-birth-year']
+
+    // Prefix single days or months with a 0
+    if (day.length === 1) {
+        day = '0' + day;
+    }
+    if (month.length === 1) {
+        month = '0' + month;
+    }
 
     // Add the date of birth to the current user
     currentUser.dob = `${year}-${month}-${day}`;
 
     // Redirect to the next step in the account creation process
-    response.redirect('create-account/find-your-address?userID=' + currentUserID);
+    if (data['origin'] === 'check-your-answers') {
+        response.redirect(`create-account/check-your-answers?userID=${currentUser.userID}`);
+    } else if (data['origin'] === 'homepage') {
+        response.redirect(`user/homepage?userID=${currentUser.userID}#your-details`);
+    } else {
+        response.redirect(`create-account/find-your-address?userID=${currentUser.userID}`);
+    }
 
 })
 
@@ -180,7 +208,14 @@ router.post('/what-is-your-address', function (request, response) {
     };
 
     // Redirect to the next step in the account creation process
-    response.redirect('create-account/what-is-your-phone-number?userID=' + currentUserID);
+    if (data['origin'] === 'check-your-answers') {
+        response.redirect(`create-account/check-your-answers?userID=${currentUser.userID}`);
+    } else if (data['origin'] === 'homepage') {
+        response.redirect(`user/homepage?userID=${currentUser.userID}#your-details`);
+    } else {
+        response.redirect(`create-account/what-is-your-phone-number?userID=${currentUser.userID}`);
+    }
+
 
 })
 
@@ -201,8 +236,16 @@ router.post('/what-is-your-phone-number', function (request, response) {
     // Add the phone number to the current user
     currentUser.phoneNumber = phoneNumber
 
+
     // Redirect to the next step in the account creation process
-    response.redirect('create-account/how-would-you-like-to-be-contacted?userID=' + currentUserID);
+    if (data['origin'] === 'check-your-answers') {
+        response.redirect(`create-account/check-your-answers?userID=${currentUser.userID}`);
+    } else if (data['origin'] === 'homepage') {
+        response.redirect(`user/homepage?userID=${currentUser.userID}#your-details`);
+    } else {
+        response.redirect(`create-account/how-would-you-like-to-be-contacted?userID=${currentUser.userID}`);
+    }
+
 
 })
 
@@ -224,7 +267,13 @@ router.post('/how-would-you-like-to-be-contacted', function (request, response) 
     currentUser.preferredContactMethod = contactPreference
 
     // Redirect to the next step in the account creation process
-    response.redirect('create-account/check-your-answers?userID=' + currentUserID);
+    if (data['origin'] === 'check-your-answers') {
+        response.redirect(`create-account/check-your-answers?userID=${currentUser.userID}`);
+    } else if (data['origin'] === 'homepage') {
+        response.redirect(`user/homepage?userID=${currentUser.userID}#your-details`);
+    } else {
+        response.redirect(`create-account/check-your-answers?userID=${currentUser.userID}`);
+    }
 
 })
 

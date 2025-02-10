@@ -14,7 +14,7 @@
             "county": "West Midlands",
             "postcode": "B1 1AA"
         },
-        "preferredContactMethod": "phone",
+        "preferredContactMethod": "Phone",
         "accountCreated": "2025-01-05",
         "pigeonCount": 6
     },
@@ -33,7 +33,7 @@
             "county": "Greater Manchester",
             "postcode": "M1 2AB"
         },
-        "preferredContactMethod": "email",
+        "preferredContactMethod": "Email",
         "accountCreated": "2023-06-20",
         "pigeonCount": 5
     },
@@ -52,7 +52,7 @@
             "county": "West Yorkshire",
             "postcode": "LS1 4AA"
         },
-        "preferredContactMethod": "email",
+        "preferredContactMethod": "Email",
         "accountCreated": "2024-04-10",
         "pigeonCount": 8
     },
@@ -71,7 +71,7 @@
             "county": "",
             "postcode": "EH1 1YZ"
         },
-        "preferredContactMethod": "phone",
+        "preferredContactMethod": "Phone",
         "accountCreated": "2022-09-15",
         "pigeonCount": 4
     }

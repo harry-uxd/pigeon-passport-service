@@ -4,6 +4,13 @@
 
 {% block content %}
 
+<!-- Split the date into its three parts -->
+{% set dob = currentUser | return('dob') %}
+{% set dobParts = dob.split('-') %}
+{% set year = dobParts[0] %}
+{% set month = dobParts[1] | lstrip('0') %}
+{% set day = dobParts[2] | lstrip('0') %}
+
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
     <form action="/what-is-your-date-of-birth" method="post" novalidate>
@@ -25,7 +32,7 @@
                   Day
                 </label>
                 <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="date-of-birth-day"
-                  name="date-of-birth-day" type="text" inputmode="numeric">
+                  name="date-of-birth-day" type="text" inputmode="numeric" value="{{ day }}">
               </div>
             </div>
             <div class="govuk-date-input__item">
@@ -34,7 +41,7 @@
                   Month
                 </label>
                 <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="date-of-birth-month"
-                  name="date-of-birth-month" type="text" inputmode="numeric">
+                  name="date-of-birth-month" type="text" inputmode="numeric" value="{{ month }}">
               </div>
             </div>
             <div class="govuk-date-input__item">
@@ -43,7 +50,7 @@
                   Year
                 </label>
                 <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="date-of-birth-year"
-                  name="date-of-birth-year" type="text" inputmode="numeric">
+                  name="date-of-birth-year" type="text" inputmode="numeric" value="{{ year }}">
               </div>
             </div>
           </div>

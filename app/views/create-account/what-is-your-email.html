@@ -18,13 +18,13 @@
           <label class="govuk-label" for="email">
             Email address
           </label>
-          <input class="govuk-input" id="email" name="email" type="text" autocomplete="email">
+          <input class="govuk-input" id="email" name="email" type="text" autocomplete="email" value="{{ currentUser | return('email') }}">
         </div>
         <div class="govuk-form-group">
           <label class="govuk-label" for="confirm-email">
             Confirm email address
           </label>
-          <input class="govuk-input" id="confirm-email" name="confirm-email" type="text" autocomplete="confirm-email">
+          <input class="govuk-input" id="confirm-email" name="confirm-email" type="text" autocomplete="confirm-email" value="{{ currentUser | return('email') }}">
         </div>
       </fieldset>
       <button type="submit" class="govuk-button" data-module="govuk-button">

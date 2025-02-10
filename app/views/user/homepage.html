@@ -26,17 +26,17 @@
             </h2>
             <ul class="govuk-tabs__list">
                 <li class="govuk-tabs__list-item govuk-tabs__list-item--selected">
-                    <a class="govuk-tabs__tab" href="#past-day">
+                    <a class="govuk-tabs__tab" href="#your-pigeons">
                         Your pigeons
                     </a>
                 </li>
                 <li class="govuk-tabs__list-item">
-                    <a class="govuk-tabs__tab" href="#past-week">
+                    <a class="govuk-tabs__tab" href="#your-details">
                         Your details
                     </a>
                 </li>
             </ul>
-            <div class="govuk-tabs__panel" id="past-day">
+            <div class="govuk-tabs__panel" id="your-pigeons">
                 <table class="govuk-table">
                     <caption class="govuk-table__caption">
                         <h2 class="govuk-heading-l">Your pigeons</h2>
@@ -73,7 +73,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="past-week">
+            <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="your-details">
                 <h2 class="govuk-heading-l">Your details</h2>
                 <dl class="govuk-summary-list">
                     <div class="govuk-summary-list__row">
@@ -85,7 +85,7 @@
                         </dd>
                         <dd class="govuk-summary-list__actions">
                             <a class="govuk-link"
-                                href="what-is-your-name?userID={{ data['userID'] }}&origin=check-your-answers">Change<span
+                                href="/create-account/what-is-your-name?userID={{ data['userID'] }}&origin=homepage">Change<span
                                     class="govuk-visually-hidden"> name</span></a>
                         </dd>
                     </div>
@@ -97,8 +97,7 @@
                             {{ currentUser | return('dob') | longDate }}
                         </dd>
                         <dd class="govuk-summary-list__actions">
-                            <!-- TODO fix these change links -->
-                            <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> date of
+                            <a class="govuk-link" href="/create-account/what-is-your-date-of-birth?userID={{ data['userID'] }}&origin=homepage">Change<span class="govuk-visually-hidden"> date of
                                     birth</span></a>
                         </dd>
                     </div>
@@ -110,7 +109,7 @@
                             {{ currentUser | return('email') }}
                         </dd>
                         <dd class="govuk-summary-list__actions">
-                            <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> customer
+                            <a class="govuk-link" href="/create-account/what-is-your-email?userID={{ data['userID'] }}&origin=homepage">Change<span class="govuk-visually-hidden"> customer
                                     reference</span></a>
                         </dd>
                     </div>
@@ -125,7 +124,7 @@
                             {% endfor %}
                         </dd>
                         <dd class="govuk-summary-list__actions">
-                            <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> address</span></a>
+                            <a class="govuk-link" href="/create-account/what-is-your-address?userID={{ data['userID'] }}&origin=homepage">Change<span class="govuk-visually-hidden"> address</span></a>
                         </dd>
                     </div>
                     <div class="govuk-summary-list__row">
@@ -137,7 +136,7 @@
                             {{ currentUser | return('phoneNumber') }}
                         </dd>
                         <dd class="govuk-summary-list__actions">
-                            <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> contact
+                            <a class="govuk-link" href="/create-account/what-is-your-phone-number?userID={{ data['userID'] }}&origin=homepage">Change<span class="govuk-visually-hidden"> contact
                                     details</span></a>
                         </dd>
                     </div>
@@ -149,7 +148,7 @@
                             {{ currentUser | return('preferredContactMethod') }}
                         </dd>
                         <dd class="govuk-summary-list__actions">
-                            <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> contact
+                            <a class="govuk-link" href="/create-account/how-would-you-like-to-be-contacted?userID={{ data['userID'] }}&origin=homepage"">Change<span class="govuk-visually-hidden"> contact
                                     details</span></a>
                         </dd>
                     </div>

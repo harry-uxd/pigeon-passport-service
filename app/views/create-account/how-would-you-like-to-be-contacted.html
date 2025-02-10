@@ -15,20 +15,27 @@
                         </h1>
                     </legend>
                     <div class="govuk-radios" data-module="govuk-radios">
-                        <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="contact-preference" name="contact-preference"
-                                type="radio" value="Email">
-                            <label class="govuk-label govuk-radios__label" for="contact-preference">
-                                Email
-                            </label>
-                        </div>
-                        <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="contact-preference-2" name="contact-preference"
-                                type="radio" value="Phone">
-                            <label class="govuk-label govuk-radios__label" for="contact-preference-2">
-                                Phone
-                            </label>
-                        </div>
+                        <!-- Create a list of our radio options, loop through them and check if they match the users' contact pref -->
+                        {% set radios = ["Email", "Phone", "Post" ] %}
+                        {% for item in radios %}
+                            {% if item == currentUser | return("preferredContactMethod") %}
+                            <div class="govuk-radios__item">
+                                <input checked class="govuk-radios__input" id="contact-preference-{{ loop.index }}" name="contact-preference"
+                                    type="radio" value="{{ item }}">
+                                <label class="govuk-label govuk-radios__label" for="contact-preference-{{ loop.index }}">
+                                    {{ item }}
+                                </label>
+                            </div>
+                            {% else %}
+                            <div class="govuk-radios__item">
+                                <input  class="govuk-radios__input" id="contact-preference-{{ loop.index }}" name="contact-preference"
+                                    type="radio" value="{{ item }}">
+                                <label class="govuk-label govuk-radios__label" for="contact-preference-{{ loop.index }}">
+                                    {{ item }}
+                                </label>
+                            </div>
+                            {% endif %}
+                        {% endfor %}
                     </div>
                 </fieldset>
             </div>
