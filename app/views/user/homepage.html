@@ -1,0 +1,165 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName="Your account" %}
+
+{% block content %}
+
+
+<!-- This gets a list of all the current user's pigeons -->
+{% set pigeons = [] %}
+{% for item in data.pigeons %}
+{% if item.ownerID == data.userID %}
+{% set pigeons = (pigeons.push(item), pigeons) %}
+{% endif %}
+{% endfor %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <span class="govuk-caption-l">{{ currentUser | return('firstName') }} {{ currentUser | return('lastName') }}
+        </span>
+        <h1 class="govuk-heading-xl">Your account </h1>
+        <p class="govuk-body-l">Manage your pigeons and personal details</p>
+        <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+        <div class="govuk-tabs" data-module="govuk-tabs">
+            <h2 class="govuk-tabs__title">
+                Contents
+            </h2>
+            <ul class="govuk-tabs__list">
+                <li class="govuk-tabs__list-item govuk-tabs__list-item--selected">
+                    <a class="govuk-tabs__tab" href="#past-day">
+                        Your pigeons
+                    </a>
+                </li>
+                <li class="govuk-tabs__list-item">
+                    <a class="govuk-tabs__tab" href="#past-week">
+                        Your details
+                    </a>
+                </li>
+            </ul>
+            <div class="govuk-tabs__panel" id="past-day">
+                <table class="govuk-table">
+                    <caption class="govuk-table__caption">
+                        <h2 class="govuk-heading-l">Your pigeons</h2>
+                    </caption>
+                    <thead class="govuk-table__head">
+                        <tr class="govuk-table__row">
+                            <th scope="col" class="govuk-table__header">Name</th>
+                            <th scope="col" class="govuk-table__header">Sex</th>
+                            <th scope="col" class="govuk-table__header">Passport expires</th>
+                            <th scope="col" class="govuk-table__header">Vaccination status</th>
+                        </tr>
+                    </thead>
+                    <tbody class="govuk-table__body">
+                        {% for item in pigeons %}
+                        <tr class="govuk-table__row">
+                            <th scope="row" class="govuk-table__header">
+                            <a class="govuk-link govuk-link--no-underline" href="pigeon-details?userID={{ data['userID'] }}&pigeonID={{ item.passportNumber }}">{{ item.name }}</a>
+                            </th>
+                            <td class="govuk-table__cell">{{ item.sex }}</td>
+                            <td class="govuk-table__cell">{{ item.passportExpiry | longDate }}</td>
+                            <td class="govuk-table__cell">
+                                {% if item.vaccinationStatus == "Up-to-date" %}
+                                <strong class="govuk-tag govuk-tag--green">
+                                    Up to date
+                                  </strong>
+                                {% else %}
+                                <strong class="govuk-tag govuk-tag--red">
+                                    Overdue
+                                  </strong>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="past-week">
+                <h2 class="govuk-heading-l">Your details</h2>
+                <dl class="govuk-summary-list">
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Name
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ currentUser | return('firstName') }} {{ currentUser | return('lastName') }}
+                        </dd>
+                        <dd class="govuk-summary-list__actions">
+                            <a class="govuk-link"
+                                href="what-is-your-name?userID={{ data['userID'] }}&origin=check-your-answers">Change<span
+                                    class="govuk-visually-hidden"> name</span></a>
+                        </dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Date of birth
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ currentUser | return('dob') | longDate }}
+                        </dd>
+                        <dd class="govuk-summary-list__actions">
+                            <!-- TODO fix these change links -->
+                            <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> date of
+                                    birth</span></a>
+                        </dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Email
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ currentUser | return('email') }}
+                        </dd>
+                        <dd class="govuk-summary-list__actions">
+                            <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> customer
+                                    reference</span></a>
+                        </dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Address
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {% set address = currentUser | return('address') %}
+                            {% for key, value in address %}
+                            <p class="govuk-body">{{ value }}</p>
+                            {% endfor %}
+                        </dd>
+                        <dd class="govuk-summary-list__actions">
+                            <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> address</span></a>
+                        </dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Phone number
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ currentUser.phoneNumber }}
+                            {{ currentUser | return('phoneNumber') }}
+                        </dd>
+                        <dd class="govuk-summary-list__actions">
+                            <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> contact
+                                    details</span></a>
+                        </dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Contact preference
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ currentUser | return('preferredContactMethod') }}
+                        </dd>
+                        <dd class="govuk-summary-list__actions">
+                            <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> contact
+                                    details</span></a>
+                        </dd>
+                    </div>
+                </dl>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
