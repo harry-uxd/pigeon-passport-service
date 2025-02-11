@@ -50,5 +50,5 @@ To run this prototype, you need:
 
 4. Open your browser and visit:
 
-   `[localhost:3000](http://localhost:3000)`
+   `http://localhost:3000`
 
