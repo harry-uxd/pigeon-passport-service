@@ -30,7 +30,7 @@ To run this prototype, you need:
 1. Clone this repository:
 
    ```sh
-   git clone https://github.com/your-repo/pigeon-passport-service.git
+   git clone https://github.com/harry-uxd/pigeon-passport-service.git
    ```
 2. Navigate into the project folder:
 
