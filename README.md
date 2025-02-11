@@ -7,9 +7,9 @@ This is a **prototype** for the GOV.UK **Pigeon Passport Service**, a fictional 
 The Pigeon Passport Service allows users to:
 
 - Create an account
-- Register a new pigeon  
-~~- Renew an existing passport~~
-~~- Report a lost or stolen passport~~~
+- Register a new pigeon (WIP)
+- Renew an existing passport (WIP)
+- Report a lost or stolen passport (WIP)
 
 This prototype is for demonstration purposes only and is **not a real service**. No actual user or pigeon data is stored.
 
