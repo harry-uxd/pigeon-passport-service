@@ -1,0 +1,131 @@
+{% extends "layouts/question-page.html" %}
+
+{% set pageName="Your account" %}
+
+{% block content %}
+
+
+<!-- This gets a list of all the current user's pigeons -->
+{% set pigeons = [] %}
+{% for item in data.pigeons %}
+{% if item.ownerID == data.userID %}
+{% set pigeons = (pigeons.push(item), pigeons) %}
+{% endif %}
+{% endfor %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-xl">{{ currentPigeon | return('name') }}</h1>
+
+        <h2 class="govuk-heading-m">Passport information</h2>
+        <dl class="govuk-summary-list govuk-summary-list--no-border">
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Name
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{ currentPigeon | return('name') }}
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Passport number
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{ currentPigeon | return('passportNumber') }}
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Passport issued
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{ currentPigeon | return('passportIssued') | longDate }}
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Passport expires
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{ currentPigeon | return('passportExpiry') | longDate }}
+                </dd>
+            </div>
+        </dl>
+
+        <h2 class="govuk-heading-m">Pigeon information</h2>
+        <dl class="govuk-summary-list">
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Age
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{ currentPigeon | return('age') }}
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Sex
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{ currentPigeon | return('sex') }}
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Breed
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{ currentPigeon | return('breed') }}
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Unique markings
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{ currentPigeon | return('uniqueMarkings') }}
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Vaccination status
+                </dt>
+                <dd class="govuk-summary-list__value">
+
+                    {% if currentPigeon | return('vaccinationStatus') == "Up-to-date" %}
+                    <strong class="govuk-tag govuk-tag--green">
+                        Up to date
+                    </strong>
+                    {% else %}
+                    <strong class="govuk-tag govuk-tag--red">
+                        Overdue
+                    </strong>
+                    {% endif %}
+                </dd>
+            </div>
+        </dl>
+
+    </div>
+    <div class="govuk-grid-column-one-third">
+        <!-- We references the /public directory here because this is where items in the /assets directory
+         are stored on 'npm run dev' -->
+        <img style="width: 100%; padding-bottom: 2rem;" src="/public/images/pigeon_avatar.png"
+            alt="An image of {{ currentPigeon | return('name') }}">
+        <h2 class="govuk-heading-m">Awards</h2>
+        {% set awards = currentPigeon | return('awards') %}
+        {% if awards | length > 0 %}
+        {% for item in awards %}
+        <div class="award-section">
+            <img src="/public/images/medal.svg" alt="An award" style="height: 2rem;">
+            <p>{{ item }}</p>
+        </div>
+        {% endfor %}
+        {% else %}
+        <p>This pigeon has not won any awards.</p>
+        {% endif %}
+    </div>
+</div>
+
+
+{% endblock %}

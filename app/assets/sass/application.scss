@@ -5,3 +5,21 @@
 
 // Add extra styles here
 @import 'patterns/card';
+
+.award-section {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    img {
+        padding-right: 10px;
+    }
+    p {
+        margin-bottom: 0px !important;
+    }
+
+}

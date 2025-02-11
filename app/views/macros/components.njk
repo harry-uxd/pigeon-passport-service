@@ -1,6 +1,4 @@
-{% macro test() %}
-<p>Test</p>
-{% endmacro %}
+{# These macros need to be imported into one of the layout files to be used on a page #}
 
 {# This takes the data object as an input and returns the user #}
 {# Annoyingly it returns a string, not a JSON object so there is a return filter to manage this #}
@@ -8,6 +6,15 @@
     {% for user in data.users %}
         {% if user.userID == data.userID%}
             {% set returnVar = user | dump | safe %}  
+            {{ returnVar }}
+        {% endif %}
+    {% endfor %}
+{% endmacro %}
+
+{% macro getCurrentPigeon(data) %}
+    {% for pigeon in data.pigeons %}
+        {% if pigeon.passportNumber == data.pigeonID %}
+            {% set returnVar = pigeon | dump | safe %}
             {{ returnVar }}
         {% endif %}
     {% endfor %}
