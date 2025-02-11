@@ -21,6 +21,7 @@ To run this prototype, you need:
 
 - [Node.js (LTS version)](https://nodejs.org/)
 - [npm](https://www.npmjs.com/) (comes with Node.js)
+- [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 - A code editor (e.g., [VS Code](https://code.visualstudio.com/))
 
 ---
@@ -32,6 +33,7 @@ To run this prototype, you need:
    ```sh
    git clone https://github.com/harry-uxd/pigeon-passport-service.git
    ```
+
 2. Navigate into the project folder:
 
    ```sh
