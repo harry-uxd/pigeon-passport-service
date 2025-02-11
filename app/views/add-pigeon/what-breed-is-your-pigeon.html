@@ -1,0 +1,66 @@
+{% extends "layouts/question-page.html" %}
+
+{% set pageName="What breed is your pigeon?" %}
+
+{% block content %}
+
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <form action="/what-breed-is-your-pigeon" method="post" novalidate>
+      <div class="govuk-form-group">
+        <fieldset class="govuk-fieldset">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl govuk-!-padding-bottom-4">
+
+            <!-- Only show the steps on the first way through -->
+            {% if not data['origin'] %}
+            <span class="govuk-caption-l">Add a pigeon - Step 1 of 7</span>
+            {% endif %}
+            <h1 class="govuk-fieldset__heading">
+              What breed is your pigeon?
+            </h1>
+          </legend>
+          <div class="govuk-radios" data-module="govuk-radios">
+            {% set breeds = ['Fancy pigeon', 'Racing pigeon', 'Homing pigeon'] %}
+            {% for breed in breeds %}
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="breed-{{ loop.index }}" name="breed" type="radio" value="{{ breed }}">
+              <label class="govuk-label govuk-radios__label" for="breed-{{ loop.index }}">
+                {{ breed }}
+              </label>
+            </div>
+            {% endfor %}
+            <div class="govuk-radios__divider">or</div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="breed-other" name="breed" type="radio" value="other" data-aria-controls="conditional-breed">
+              <label class="govuk-label govuk-radios__label" for="breed-other">
+                Other breed
+              </label>
+            </div>
+            <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-breed">
+              <div class="govuk-form-group">
+                <label class="govuk-label" for="other-breed-input">
+                  Breed
+                </label>
+                <input class="govuk-input govuk-!-width-two-thirds" id="other-breed-input" name="other-breed">
+              </div>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+      <button type="submit" class="govuk-button" data-module="govuk-button">
+        Continue
+      </button>
+    </form>
+  </div>
+</div>
+
+<script type="application/json" id="validation-rules">
+  {
+      "breed": {
+          "presence": { "allowEmpty": false, "message": "Select your pigeon's breed" }
+      }
+  }
+</script>
+
+{% endblock %}

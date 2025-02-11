@@ -1,0 +1,42 @@
+{% extends "layouts/question-page.html" %}
+
+{% set pageName="What is your name?" %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <form action="/what-is-your-pigeons-name" method="post" novalidate>
+      <fieldset class="govuk-fieldset">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl govuk-!-padding-bottom-4">
+          <!-- Only show the steps on the first way through -->
+          {% if not data['origin'] %}
+          <span class="govuk-caption-l">Add a pigeon - Step 1 of 7</span>
+          {% endif %}
+          <h1 class="govuk-fieldset__heading">
+            What is your pigeon's name?
+          </h1>
+        </legend>
+        <div class="govuk-form-group">
+          <label class="govuk-label" for="name">
+            Name
+          </label>
+          <input class="govuk-input" id="name" name="name" type="text" autocomplete="name">
+        </div>
+      </fieldset>
+      <button type="submit" class="govuk-button" data-module="govuk-button">
+        Continue
+      </button>
+    </form>
+  </div>
+</div>
+
+<script type="application/json" id="validation-rules">
+  {
+      "name": {
+          "presence": { "allowEmpty": false, "message": "Enter your pigeon's name" }
+      }
+  }
+</script>
+
+{% endblock %}
